@@ -1,0 +1,30 @@
+#lang re_sketching
+// Fractal: Sierpinski triangle.
+// 再帰的に三角形を分割して描く。
+
+fun sierpinski(x1, y1, x2, y2, x3, y3, depth):
+  if depth <= 0
+  | no_stroke()
+    fill(220, 80, 60)
+    triangle(x1, y1, x2, y2, x3, y3)
+  | let mx12 = (x1 + x2) / 2.0
+    let my12 = (y1 + y2) / 2.0
+    let mx23 = (x2 + x3) / 2.0
+    let my23 = (y2 + y3) / 2.0
+    let mx31 = (x3 + x1) / 2.0
+    let my31 = (y3 + y1) / 2.0
+    sierpinski(x1, y1, mx12, my12, mx31, my31, depth - 1)
+    sierpinski(mx12, my12, x2, y2, mx23, my23, depth - 1)
+    sierpinski(mx31, my31, mx23, my23, x3, y3, depth - 1)
+
+fun setup():
+  size(640, 400)
+  no_loop()
+
+fun draw():
+  background(20)
+  let pad = 40.0
+  sierpinski(width / 2.0, pad,
+             pad, height - pad,
+             width - pad, height - pad,
+             6)

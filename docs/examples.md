@@ -51,6 +51,9 @@ Wiki: [Examples](https://github.com/bluehive/re-sketching-rhombus/wiki/Examples)
 - **[Regular Polygons](examples/form.md#regular-polygons)** — `begin_shape` / `vertex` で正多角形を描き回転。 (`examples/manual/form/regular-polygons.rhm`)
 - **[Bezier](../examples/manual/form/bezier.rhm)** — 3 次ベジェ曲線（マウスが制御点）。 (`examples/manual/form/bezier.rhm`)
 - **[Begin Shape](../examples/manual/form/begin-shape.rhm)** — 星形・折れ線・points モード。 (`examples/manual/form/begin-shape.rhm`)
+- **[Fractal: Sierpinski](../examples/manual/form/fractal-sierpinski.rhm)** — シェルピンスキーの三角形。 (`examples/manual/form/fractal-sierpinski.rhm`)
+- **[Fractal: Koch Snowflake](../examples/manual/form/fractal-koch.rhm)** — コッホ雪片。 (`examples/manual/form/fractal-koch.rhm`)
+- **[Fractal: Tree](../examples/manual/form/fractal-tree.rhm)** — 再帰ツリー（マウスで角・深さ）。 (`examples/manual/form/fractal-tree.rhm`)
 
 ## Math
 

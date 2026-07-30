@@ -1,6 +1,6 @@
 # Examples — Form
 
-基本図形・円グラフ・正多角形。
+基本図形・円グラフ・正多角形・**フラクタル**。
 
 [← Examples 一覧](Examples) · ソース: `examples/manual/form/`
 
@@ -137,4 +137,143 @@ fun draw():
   rotate(frame_count / -100.0)
   polygon(0, 0, 70, 7)
   pop_matrix()
+```
+
+## Fractal: Sierpinski
+
+シェルピンスキーの三角形。再帰的に中点を取って 3 つの小さな三角形を描きます。
+
+ファイル: [`examples/manual/form/fractal-sierpinski.rhm`](https://github.com/bluehive/re-sketching-rhombus/blob/main/examples/manual/form/fractal-sierpinski.rhm)
+
+```rhombus
+#lang re_sketching
+// Fractal: Sierpinski triangle.
+// 再帰的に三角形を分割して描く。
+
+fun sierpinski(x1, y1, x2, y2, x3, y3, depth):
+  if depth <= 0
+  | no_stroke()
+    fill(220, 80, 60)
+    triangle(x1, y1, x2, y2, x3, y3)
+  | let mx12 = (x1 + x2) / 2.0
+    let my12 = (y1 + y2) / 2.0
+    let mx23 = (x2 + x3) / 2.0
+    let my23 = (y2 + y3) / 2.0
+    let mx31 = (x3 + x1) / 2.0
+    let my31 = (y3 + y1) / 2.0
+    sierpinski(x1, y1, mx12, my12, mx31, my31, depth - 1)
+    sierpinski(mx12, my12, x2, y2, mx23, my23, depth - 1)
+    sierpinski(mx31, my31, mx23, my23, x3, y3, depth - 1)
+
+fun setup():
+  size(640, 400)
+  no_loop()
+
+fun draw():
+  background(20)
+  let pad = 40.0
+  sierpinski(width / 2.0, pad,
+             pad, height - pad,
+             width - pad, height - pad,
+             6)
+```
+
+## Fractal: Koch Snowflake
+
+コッホ曲線を正三角形の 3 辺に適用した雪片。再帰の深さでギザギザが増えます。
+
+ファイル: [`examples/manual/form/fractal-koch.rhm`](https://github.com/bluehive/re-sketching-rhombus/blob/main/examples/manual/form/fractal-koch.rhm)
+
+```rhombus
+#lang re_sketching
+// Fractal: Koch snowflake.
+// コッホ曲線を 3 辺に適用して雪片を描く。
+
+fun koch(x1, y1, x2, y2, depth):
+  if depth <= 0
+  | line(x1, y1, x2, y2)
+  | let dx = x2 - x1
+    let dy = y2 - y1
+    // 3 等分点
+    let xA = x1 + dx / 3.0
+    let yA = y1 + dy / 3.0
+    let xB = x1 + 2.0 * dx / 3.0
+    let yB = y1 + 2.0 * dy / 3.0
+    // 外側の頂点（60° 回転）
+    let px = xB - xA
+    let py = yB - yA
+    let ang = -pi / 3.0
+    let xC = xA + px * math.cos(ang) - py * math.sin(ang)
+    let yC = yA + px * math.sin(ang) + py * math.cos(ang)
+    koch(x1, y1, xA, yA, depth - 1)
+    koch(xA, yA, xC, yC, depth - 1)
+    koch(xC, yC, xB, yB, depth - 1)
+    koch(xB, yB, x2, y2, depth - 1)
+
+fun setup():
+  size(640, 400)
+  no_loop()
+
+fun draw():
+  background(12, 20, 40)
+  stroke(180, 220, 255)
+  stroke_weight(1.5)
+  no_fill()
+  let cx = width / 2.0
+  let cy = height / 2.0 + 30.0
+  let r = 160.0
+  // 正三角形の 3 頂点
+  let a0 = -pi / 2.0
+  let a1 = a0 + 2.0 * pi / 3.0
+  let a2 = a0 + 4.0 * pi / 3.0
+  let x0 = cx + r * math.cos(a0)
+  let y0 = cy + r * math.sin(a0)
+  let x1 = cx + r * math.cos(a1)
+  let y1 = cy + r * math.sin(a1)
+  let x2 = cx + r * math.cos(a2)
+  let y2 = cy + r * math.sin(a2)
+  let depth = 4
+  koch(x0, y0, x1, y1, depth)
+  koch(x1, y1, x2, y2, depth)
+  koch(x2, y2, x0, y0, depth)
+```
+
+## Fractal: Tree
+
+枝分かれするフラクタルツリー。マウス X で開き角、Y で再帰深さを変えられます。
+
+ファイル: [`examples/manual/form/fractal-tree.rhm`](https://github.com/bluehive/re-sketching-rhombus/blob/main/examples/manual/form/fractal-tree.rhm)
+
+```rhombus
+#lang re_sketching
+// Fractal: recursive tree.
+// 枝分かれする木。マウス X で開き角、Y で深さを変える。
+
+fun branch(len, depth, angle_spread):
+  stroke(120 + depth * 18, 180, 100)
+  stroke_weight(math.max(1.0, depth * 0.6))
+  line(0, 0, 0, -len)
+  when depth > 0
+  | translate(0, -len)
+    let next = len * 0.72
+    push_matrix()
+    rotate(-angle_spread)
+    branch(next, depth - 1, angle_spread)
+    pop_matrix()
+    push_matrix()
+    rotate(angle_spread)
+    branch(next, depth - 1, angle_spread)
+    pop_matrix()
+
+fun setup():
+  size(640, 400)
+  frame_rate(30)
+
+fun draw():
+  background(15, 18, 28)
+  // 開き角: マウス X、深さ: マウス Y
+  let spread = remap(mouse_x, 0, width, 0.15, 1.1)
+  let depth = math.floor(remap(mouse_y, 0, height, 3, 10))
+  translate(width / 2.0, height - 20.0)
+  branch(90.0, depth, spread)
 ```

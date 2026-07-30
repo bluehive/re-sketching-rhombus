@@ -1,0 +1,51 @@
+#lang re_sketching
+// Fractal: Koch snowflake.
+// コッホ曲線を 3 辺に適用して雪片を描く。
+
+fun koch(x1, y1, x2, y2, depth):
+  if depth <= 0
+  | line(x1, y1, x2, y2)
+  | let dx = x2 - x1
+    let dy = y2 - y1
+    // 3 等分点
+    let xA = x1 + dx / 3.0
+    let yA = y1 + dy / 3.0
+    let xB = x1 + 2.0 * dx / 3.0
+    let yB = y1 + 2.0 * dy / 3.0
+    // 外側の頂点（60° 回転）
+    let px = xB - xA
+    let py = yB - yA
+    let ang = -pi / 3.0
+    let xC = xA + px * math.cos(ang) - py * math.sin(ang)
+    let yC = yA + px * math.sin(ang) + py * math.cos(ang)
+    koch(x1, y1, xA, yA, depth - 1)
+    koch(xA, yA, xC, yC, depth - 1)
+    koch(xC, yC, xB, yB, depth - 1)
+    koch(xB, yB, x2, y2, depth - 1)
+
+fun setup():
+  size(640, 400)
+  no_loop()
+
+fun draw():
+  background(12, 20, 40)
+  stroke(180, 220, 255)
+  stroke_weight(1.5)
+  no_fill()
+  let cx = width / 2.0
+  let cy = height / 2.0 + 30.0
+  let r = 160.0
+  // 正三角形の 3 頂点
+  let a0 = -pi / 2.0
+  let a1 = a0 + 2.0 * pi / 3.0
+  let a2 = a0 + 4.0 * pi / 3.0
+  let x0 = cx + r * math.cos(a0)
+  let y0 = cy + r * math.sin(a0)
+  let x1 = cx + r * math.cos(a1)
+  let y1 = cy + r * math.sin(a1)
+  let x2 = cx + r * math.cos(a2)
+  let y2 = cy + r * math.sin(a2)
+  let depth = 4
+  koch(x0, y0, x1, y1, depth)
+  koch(x1, y1, x2, y2, depth)
+  koch(x2, y2, x0, y0, depth)

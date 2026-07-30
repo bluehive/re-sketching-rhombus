@@ -1,0 +1,31 @@
+#lang re_sketching
+// Fractal: recursive tree.
+// 枝分かれする木。マウス X で開き角、Y で深さを変える。
+
+fun branch(len, depth, angle_spread):
+  stroke(120 + depth * 18, 180, 100)
+  stroke_weight(math.max(1.0, depth * 0.6))
+  line(0, 0, 0, -len)
+  when depth > 0
+  | translate(0, -len)
+    let next = len * 0.72
+    push_matrix()
+    rotate(-angle_spread)
+    branch(next, depth - 1, angle_spread)
+    pop_matrix()
+    push_matrix()
+    rotate(angle_spread)
+    branch(next, depth - 1, angle_spread)
+    pop_matrix()
+
+fun setup():
+  size(640, 400)
+  frame_rate(30)
+
+fun draw():
+  background(15, 18, 28)
+  // 開き角: マウス X、深さ: マウス Y
+  let spread = remap(mouse_x, 0, width, 0.15, 1.1)
+  let depth = math.floor(remap(mouse_y, 0, height, 3, 10))
+  translate(width / 2.0, height - 20.0)
+  branch(90.0, depth, spread)

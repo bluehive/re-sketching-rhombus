@@ -13,7 +13,7 @@ racket examples/manual/input/easing.rhm
 | [Color](Examples-Color) | 色の束縛・相対的な見え方・グラデーション。 |
 | [Input](Examples-Input) | マウス・キーボード入力とイベントハンドラ。 |
 | [Transform](Examples-Transform) | 座標変換（translate / scale / rotate）と行列スタック。 |
-| [Form](Examples-Form) | 基本図形・曲線・頂点・円グラフ・正多角形。 |
+| [Form](Examples-Form) | 基本図形・曲線・頂点・円グラフ・正多角形・フラクタル。 |
 | [Math](Examples-Math) | 距離・写像・三角関数・ノイズ・極座標。 |
 
 ## カテゴリ
@@ -48,6 +48,9 @@ racket examples/manual/input/easing.rhm
 - **Regular Polygons** — `begin_shape` / `vertex` で正多角形を描き回転。
 - **Bezier** — 3 次ベジェ曲線。
 - **Begin Shape** — 星形・折れ線・points モード。
+- **Fractal: Sierpinski** — シェルピンスキーの三角形（再帰分割）。
+- **Fractal: Koch Snowflake** — コッホ雪片。
+- **Fractal: Tree** — マウスで開く角・深さを変える再帰ツリー。
 
 ### [Math](Examples-Math)
 
