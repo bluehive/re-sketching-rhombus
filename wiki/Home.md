@@ -6,6 +6,7 @@
 | ページ | 内容 |
 |--------|------|
 | [Cheat Sheet](Cheat-Sheet) | 関数一覧のクイックリファレンス（[Sketching Overview](https://docs.racket-lang.org/manual-sketching/overview.html) 相当） |
+| [Examples](Examples) | 描写サンプル（[Sketching Examples](https://docs.racket-lang.org/manual-sketching/Examples.html) 相当） |
 | [Drawing Primitives](Drawing-Primitives) | `point` / `line` / `ellipse` / `circle` / `arc` / `rect` / `square` / `quad` / `triangle` |
 | [Color and Style](Color-and-Style) | `background` / `fill` / `stroke` / ストローク属性 / モード |
 | [Transform](Transform) | `translate` / `rotate` / `scale` / 行列スタック |
@@ -23,7 +24,8 @@
 ## リポジトリ
 
 - ソース: https://github.com/bluehive/re-sketching-rhombus
-- 例: `examples/test/sketch1.rhm` … `sketch9.rhm`
+- テスト例: `examples/test/sketch1.rhm` … `sketch9.rhm`
+- マニュアル例: `examples/manual/`（[Examples](Examples)）
 - リポジトリ内ミラー: `docs/` · `wiki/`
 
 **Implemented by Grok (xAI).** MIT License.

@@ -1,0 +1,25 @@
+#lang re_sketching
+// Rotate.
+// 中心まわりに回転する正方形。時々ジッターを加える。
+// Original: Processing Rotate / Sketching rotate
+// 注: second() 未実装のため frame_count でジッター更新。
+
+def mutable angle = 0.0
+def mutable jitter = 0.0
+
+fun setup():
+  size(640, 360)
+  frame_rate(60)
+  no_stroke()
+  fill(255)
+  rect_mode(#'center)
+
+fun draw():
+  background(51)
+  when math.modulo(frame_count, 60) == 0
+  | jitter := random(-0.1, 0.1)
+  angle := angle + jitter
+  let c = math.cos(angle)
+  translate(width / 2.0, height / 2.0)
+  rotate(c)
+  rect(0, 0, 180, 180)

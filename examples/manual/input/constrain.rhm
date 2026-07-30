@@ -1,0 +1,32 @@
+#lang re_sketching
+// Constrain.
+// イージングで円を動かし、constrain で枠内に制限する。
+// Original: Processing Constrain / Sketching constrain
+
+def easing = 0.05
+def radius = 24.0
+def edge = 100.0
+def inner = edge + radius
+
+def mutable mx = 0.0
+def mutable my = 0.0
+
+fun setup():
+  size(640, 360)
+  frame_rate(60)
+  no_stroke()
+  ellipse_mode(#'radius)
+  rect_mode(#'corners)
+
+fun draw():
+  background(51)
+  when math.abs(mouse_x - mx) > 0.1
+  | mx := mx + (mouse_x - mx) * easing
+  when math.abs(mouse_y - my) > 0.1
+  | my := my + (mouse_y - my) * easing
+  mx := constrain(mx, inner, width - inner)
+  my := constrain(my, inner, height - inner)
+  fill(76)
+  rect(edge, edge, width - edge, height - edge)
+  fill(255)
+  ellipse(mx, my, radius, radius)

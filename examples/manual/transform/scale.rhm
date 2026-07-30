@@ -1,0 +1,26 @@
+#lang re_sketching
+// Scale.
+// cos でスケールを変化させ、拡大縮小する矩形。
+// Original: Processing Scale / Sketching scale
+
+def mutable a = 0.0
+def mutable s = 0.0
+
+fun setup():
+  size(640, 360)
+  rect_mode(#'center)
+  no_stroke()
+  frame_rate(30)
+
+fun draw():
+  background(102)
+  a := a + 0.04
+  s := 2.0 * math.cos(a)
+  translate(width / 2.0, height / 2.0)
+  scale(s)
+  fill(51)
+  rect(0, 0, 50, 50)
+  translate(75, 0)
+  fill(255)
+  scale(s)
+  rect(0, 0, 50, 50)

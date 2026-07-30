@@ -1,0 +1,27 @@
+#lang re_sketching
+// Sine.
+// sin で直径が脈動する 3 つの円。
+// Original: Processing Sine / Sketching sine
+
+def mutable diameter = 100.0
+def mutable angle = 0.0
+
+fun setup():
+  size(640, 360)
+  no_stroke()
+  frame_rate(60)
+  diameter := height - 10.0
+  fill(255, 204, 0)
+
+fun draw():
+  background(0)
+  let dh = diameter / 2.0
+  let hh = height / 2.0
+  let wh = width / 2.0
+  let d1 = 10 + math.sin(angle) * dh + dh
+  let d2 = 10 + math.sin(angle + pi / 2.0) * dh + dh
+  let d3 = 10 + math.sin(angle + pi) * dh + dh
+  ellipse(0, hh, d1, d1)
+  ellipse(wh, hh, d2, d2)
+  ellipse(width, hh, d3, d3)
+  angle := angle + 0.02

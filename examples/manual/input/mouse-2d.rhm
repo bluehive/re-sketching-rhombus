@@ -1,0 +1,18 @@
+#lang re_sketching
+// Mouse 2D.
+// マウス位置で矩形の位置とサイズを変え、対称にもう一つ描く。
+// Original: Processing Mouse2D / Sketching mouse-2d
+
+fun setup():
+  size(640, 360)
+  no_stroke()
+  rect_mode(#'center)
+
+fun draw():
+  background(51)
+  fill(255, 204)
+  rect(mouse_x, height / 2.0, mouse_y / 2.0 + 10, mouse_y / 2.0 + 10)
+  let inverse_x = width - mouse_x
+  let inverse_y = height - mouse_y
+  fill(255, 204)
+  rect(inverse_x, height / 2.0, inverse_y / 2.0 + 10, inverse_y / 2.0 + 10)

@@ -1,0 +1,21 @@
+#lang re_sketching
+// Easing.
+// 図形がカーソルへ滑らかに追従（イージング）。
+// Original: Processing Easing / Sketching easing
+
+def mutable x = 0.0
+def mutable y = 0.0
+def easing = 0.05
+
+fun setup():
+  size(640, 360)
+  frame_rate(60)
+  no_stroke()
+
+fun draw():
+  background(51)
+  let dx = mouse_x - x
+  let dy = mouse_y - y
+  x := x + dx * easing
+  y := y + dy * easing
+  ellipse(x, y, 66, 66)

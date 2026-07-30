@@ -1,0 +1,24 @@
+#lang re_sketching
+// Distance 2D.
+// マウスからの距離で楕円サイズを変える距離場。
+// Original: Processing Distance2D / Sketching distance2d
+
+def mutable max_distance = 1.0
+
+fun setup():
+  size(640, 360)
+  no_stroke()
+  frame_rate(60)
+  max_distance := dist(0, 0, width, height)
+
+fun draw():
+  background(0)
+  def mutable i = 0.0
+  while i <= width:
+    def mutable j = 0.0
+    while j <= height:
+      let size0 = dist(mouse_x, mouse_y, i, j)
+      let s = (size0 / max_distance) * 66.0
+      ellipse(i, j, s, s)
+      j := j + 20
+    i := i + 20

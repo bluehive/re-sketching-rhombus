@@ -1,0 +1,19 @@
+#lang re_sketching
+// Mouse Press.
+// マウス位置に十字。ボタン押下で線色を反転。
+// Original: Processing MousePress / Sketching mouse-press
+
+fun setup():
+  size(640, 360)
+  fill(126)
+  background(102)
+
+fun draw_cross(x, y):
+  line(x - 66, y, x + 66, y)
+  line(x, y - 66, x, y + 66)
+
+fun draw():
+  if mouse_pressed
+  | stroke(255)
+  | stroke(0)
+  draw_cross(mouse_x, mouse_y)

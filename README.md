@@ -151,9 +151,17 @@ fun draw():
 | 場所 | 内容 |
 |------|------|
 | [Cheat Sheet](docs/cheat-sheet.md) | Sketching Overview 風の関数一覧 |
-| [GitHub Wiki](https://github.com/bluehive/re-sketching-rhombus/wiki) | 描写・色・変換・入力などの詳細 |
+| [Examples](docs/examples.md) | Sketching Examples 風の描写サンプル（説明 + コード） |
+| [GitHub Wiki](https://github.com/bluehive/re-sketching-rhombus/wiki) | 描写 API とサンプルの詳細 |
 | `wiki/*.md` | Wiki のソース（リポジトリ内ミラー） |
 | `scripts/publish-wiki.sh` | `wiki/` → GitHub Wiki へ同期 |
+
+マニュアル例の実行:
+
+```bash
+racket examples/manual/input/easing.rhm
+racket examples/manual/math/sine-wave.rhm
+```
 
 ## ディレクトリ構成
 
@@ -164,7 +172,9 @@ fun draw():
 | `re-sketching/` | メタパッケージ |
 | `examples/test/*.rhm` | sketch1–9（Rhombus・主） |
 | `examples/test/*.rkt` | 同上（Racket 互換） |
+| `examples/manual/` | Sketching Examples 相当の描写サンプル |
 | `docs/cheat-sheet.md` | API チートシート |
+| `docs/examples.md` | サンプル説明 + コード |
 | `wiki/` | GitHub Wiki 用 Markdown |
 | `plan.md` | エージェント向け進捗プラン |
 

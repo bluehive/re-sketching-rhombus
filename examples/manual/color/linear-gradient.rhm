@@ -1,0 +1,39 @@
+#lang re_sketching
+// Simple Linear Gradient.
+// remap + RGB 補間でグラデーションを描く（lerp-color 未実装のため自前補間）。
+// Original: Processing LinearGradient / Sketching linear-gradient
+
+fun mix(r1, g1, b1, r2, g2, b2, t):
+  color(lerp(r1, r2, t), lerp(g1, g2, t), lerp(b1, b2, t))
+
+fun set_gradient(x, y, w, h, r1, g1, b1, r2, g2, b2, axis):
+  no_fill()
+  match axis
+  | #'y_axis:
+      def mutable i = y
+      while i <= y + h:
+        let t = remap(i, y, y + h, 0, 1)
+        stroke(mix(r1, g1, b1, r2, g2, b2, t))
+        line(x, i, x + w, i)
+        i := i + 1
+  | #'x_axis:
+      def mutable i = x
+      while i <= x + w:
+        let t = remap(i, x, x + w, 0, 1)
+        stroke(mix(r1, g1, b1, r2, g2, b2, t))
+        line(i, y, i, y + h)
+        i := i + 1
+  | ~else:
+      #void
+
+fun setup():
+  size(640, 360)
+  no_loop()
+
+fun draw():
+  // 背景: 白→黒 / 黒→白
+  set_gradient(0, 0, width / 2.0, height, 255, 255, 255, 0, 0, 0, #'x_axis)
+  set_gradient(width / 2.0, 0, width / 2.0, height, 0, 0, 0, 255, 255, 255, #'x_axis)
+  // 前景: オレンジ→青 / 青→オレンジ
+  set_gradient(50, 90, 540, 80, 204, 102, 0, 0, 102, 153, #'y_axis)
+  set_gradient(50, 190, 540, 80, 0, 102, 153, 204, 102, 0, #'x_axis)

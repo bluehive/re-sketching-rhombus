@@ -1,0 +1,34 @@
+#lang re_sketching
+// Points and Lines.
+// point と line で基本的な幾何を描く。d を変えるとスケールが変わる。
+// Original: Processing PointsLines / Sketching point-and-lines
+
+def d = 70.0
+def p1 = d
+def p2 = p1 + d
+def p3 = p2 + d
+def p4 = p3 + d
+
+fun setup():
+  size(640, 360)
+  background(0)
+
+fun draw():
+  background(0)
+  push_matrix()
+  translate(140, 40)
+  stroke(153)
+  stroke_weight(1)
+  line(p3, p3, p2, p3)
+  line(p2, p3, p2, p2)
+  line(p2, p2, p3, p2)
+  line(p3, p2, p3, p3)
+  stroke(255)
+  stroke_weight(4)
+  point(p1, p1)
+  point(p1, p3)
+  point(p2, p4)
+  point(p3, p1)
+  point(p4, p2)
+  point(p4, p4)
+  pop_matrix()

@@ -1,0 +1,27 @@
+#lang re_sketching
+// Pie Chart.
+// arc で配列データから円グラフを描く。
+// Original: Processing PieChart / Sketching pie-chart
+
+def angles = [30.0, 10.0, 45.0, 35.0, 60.0, 38.0, 75.0, 67.0]
+
+fun setup():
+  size(640, 360)
+  no_stroke()
+  no_loop()
+
+fun pie_chart(diameter, data):
+  def mutable last_angle = 0.0
+  def mutable i = 0
+  let n = data.length()
+  for (a in data):
+    let gray = remap(i, 0, n, 0, 255)
+    fill(gray)
+    arc(width / 2.0, height / 2.0, diameter, diameter,
+        last_angle, last_angle + radians(a))
+    last_angle := last_angle + radians(a)
+    i := i + 1
+
+fun draw():
+  background(100)
+  pie_chart(300, angles)

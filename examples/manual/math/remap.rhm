@@ -1,0 +1,16 @@
+#lang re_sketching
+// Remap (Map).
+// mouse_x を色と直径に写像する。
+// Original: Processing Map / Sketching remap
+
+fun setup():
+  size(640, 360)
+  no_stroke()
+  frame_rate(60)
+
+fun draw():
+  background(0)
+  let c = math.max(remap(mouse_x, 0, width, 0, 175), 0)
+  let d = remap(mouse_x, 0, width, 40, 300)
+  fill(255, c, 0)
+  ellipse(width / 2.0, height / 2.0, d, d)

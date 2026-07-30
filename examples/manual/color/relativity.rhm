@@ -1,0 +1,30 @@
+#lang re_sketching
+// Relativity.
+// 同じ色の並びでも順序が変わると見え方が変わる例。
+// Original: Processing Relativity / Sketching relativity
+
+def a = color(165, 167, 20)
+def b = color(77, 86, 59)
+def c = color(42, 106, 105)
+def d = color(165, 89, 20)
+def e = color(146, 150, 127)
+
+fun setup():
+  size(640, 360)
+  no_loop()
+
+fun draw_band(colors, y_pos, bar_w):
+  let num = colors.length()
+  def mutable i = 0.0
+  while i < width:
+    def mutable j = 0
+    for (col in colors):
+      fill(col)
+      rect(i + j * bar_w, y_pos, bar_w, height / 2.0)
+      j := j + 1
+    i := i + bar_w * num
+
+fun draw():
+  let bar_w = width / 128.0
+  draw_band([a, b, c, d, e], 0, bar_w)
+  draw_band([c, a, d, b, e], height / 2.0, bar_w)

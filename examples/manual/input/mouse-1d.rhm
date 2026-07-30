@@ -1,0 +1,18 @@
+#lang re_sketching
+// Mouse 1D.
+// mouse_x で左右の矩形の大きさと明度をバランスさせる。
+// Original: Processing Mouse1D / Sketching mouse-1d
+
+fun setup():
+  size(640, 360)
+  no_stroke()
+  rect_mode(#'center)
+
+fun draw():
+  background(0)
+  let r1 = remap(mouse_x, 0, width, 0, height)
+  let r2 = height - r1
+  fill(r1)
+  rect((width + r1) / 2.0, height / 2.0, r1, r1)
+  fill(r2)
+  rect((width - r1) / 2.0, height / 2.0, r2, r2)

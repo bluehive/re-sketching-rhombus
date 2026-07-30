@@ -1,0 +1,39 @@
+#lang re_sketching
+// Keyboard.
+// 文字キーで縦帯を描画。非文字キーで画面クリア。
+// Original: Processing Keyboard / Sketching keyboard
+// 注: millis 未実装のため frame_count で色を変化。
+
+def mutable rect_width = 0.0
+
+fun setup():
+  size(640, 360)
+  no_stroke()
+  background(0)
+  rect_width := width / 4.0
+
+fun draw():
+  // 描画はキーイベント側
+  #void
+
+fun on_key_pressed():
+  match key
+  | s :: String:
+      when s.length() == 1:
+        let ch = s[0]
+        // a-z / A-Z
+        let code = Char.to_int(ch)
+        let lower = if code >= Char.to_int(Char"A") && code <= Char.to_int(Char"Z")
+                    | code + 32
+                    | code
+        when lower >= Char.to_int(Char"a") && lower <= Char.to_int(Char"z")
+        | let key_index = lower - Char.to_int(Char"a")
+          fill(math.modulo(frame_count * 7, 255))
+          let x = remap(key_index, 0, 25, 0, width - rect_width)
+          rect(x, 0, rect_width, height)
+        | ~else:
+          background(0)
+      | ~else:
+        background(0)
+  | ~else:
+      background(0)

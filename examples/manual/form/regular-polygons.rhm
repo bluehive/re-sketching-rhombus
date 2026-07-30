@@ -1,0 +1,47 @@
+#lang re_sketching
+// Regular Polygons.
+// 正多角形を triangle 扇で描き、回転させる。
+// Original: Processing RegularPolygon / Sketching regular-polygons
+// 注: begin_shape/vertex 未実装のため triangle で近似。
+
+fun polygon(cx, cy, radius, npoints):
+  let angle = 2.0 * pi / npoints
+  def mutable a = 0.0
+  def mutable px = cx + radius * math.cos(0.0)
+  def mutable py = cy + radius * math.sin(0.0)
+  def mutable i = 0
+  while i < npoints:
+    a := a + angle
+    let sx = cx + radius * math.cos(a)
+    let sy = cy + radius * math.sin(a)
+    triangle(cx, cy, px, py, sx, sy)
+    px := sx
+    py := sy
+    i := i + 1
+
+fun setup():
+  size(640, 360)
+  frame_rate(60)
+
+fun draw():
+  background(102)
+  no_stroke()
+  fill(255)
+
+  push_matrix()
+  translate(0.2 * width, 0.5 * height)
+  rotate(frame_count / 200.0)
+  polygon(0, 0, 82, 3)
+  pop_matrix()
+
+  push_matrix()
+  translate(0.5 * width, 0.5 * height)
+  rotate(frame_count / 50.0)
+  polygon(0, 0, 80, 20)
+  pop_matrix()
+
+  push_matrix()
+  translate(0.8 * width, 0.5 * height)
+  rotate(frame_count / -100.0)
+  polygon(0, 0, 70, 7)
+  pop_matrix()

@@ -1,0 +1,39 @@
+#lang re_sketching
+// Sine Cosine.
+// sin / cos で中心矩形の周囲を回る円。
+// Original: Processing SineCosine / Sketching sine-cosine
+
+def mutable x1 = 0.0
+def mutable x2 = 0.0
+def mutable y1 = 0.0
+def mutable y2 = 0.0
+def mutable angle1 = 0.0
+def mutable angle2 = 0.0
+def scalar = 70.0
+
+fun setup():
+  size(640, 360)
+  no_stroke()
+  rect_mode(#'center)
+  frame_rate(60)
+
+fun draw():
+  background(0)
+  let ang1 = radians(angle1)
+  let ang2 = radians(angle2)
+  let wh = width / 2.0
+  let hh = height / 2.0
+  x1 := wh + scalar * math.cos(ang1)
+  x2 := wh + scalar * math.cos(ang2)
+  y1 := hh + scalar * math.sin(ang1)
+  y2 := hh + scalar * math.sin(ang2)
+  fill(255)
+  rect(wh, hh, 140, 140)
+  fill(0, 102, 153)
+  ellipse(x1, hh - 120, scalar, scalar)
+  ellipse(x2, hh + 120, scalar, scalar)
+  fill(255, 204, 0)
+  ellipse(wh - 120, y1, scalar, scalar)
+  ellipse(wh + 120, y2, scalar, scalar)
+  angle1 := angle1 + 2
+  angle2 := angle2 + 3

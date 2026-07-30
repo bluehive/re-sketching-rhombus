@@ -1,0 +1,26 @@
+#lang re_sketching
+// Translate.
+// translate で原点を動かし、同じ座標の矩形がスライドする。
+// Original: Processing Translate / Sketching translate
+
+def mutable x = 0.0
+def dim = 80.0
+
+fun setup():
+  size(640, 360)
+  frame_rate(60)
+  rect_mode(#'center)
+
+fun draw():
+  background(102)
+  no_stroke()
+  x := x + 0.8
+  when x > width + dim
+  | x := -dim
+  translate(x, height / 2.0 - dim / 2.0)
+  fill(255)
+  rect(0, 0, dim, dim)
+  // 変換は積み重なるので、この矩形は 2 倍速
+  translate(x, dim)
+  fill(0)
+  rect(0, 0, dim, dim)

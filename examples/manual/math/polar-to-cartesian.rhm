@@ -1,0 +1,26 @@
+#lang re_sketching
+// Polar to Cartesian.
+// 極座標 (r, theta) を直交座標に変換して円を回す。
+// Original: Processing PolarToCartesian / Sketching polar-to-cartesian
+
+def mutable r = 0.0
+def mutable theta = 0.0
+def mutable theta_vel = 0.0
+def theta_acc = 0.0001
+
+fun setup():
+  size(640, 360)
+  frame_rate(60)
+  ellipse_mode(#'center)
+  no_stroke()
+  fill(200)
+  r := height * 0.45
+
+fun draw():
+  background(0)
+  translate(width / 2.0, height / 2.0)
+  let x = r * math.cos(theta)
+  let y = r * math.sin(theta)
+  ellipse(x, y, 32, 32)
+  theta_vel := theta_vel + theta_acc
+  theta := theta + theta_vel

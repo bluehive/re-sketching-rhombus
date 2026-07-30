@@ -1,0 +1,48 @@
+#lang re_sketching
+// Mouse Functions.
+// ドラッグで矩形を掴んで移動（on_mouse_* ハンドラ）。
+// Original: Processing MouseFunctions / Sketching mouse-functions
+
+def mutable bx = 0.0
+def mutable by = 0.0
+def box_size = 75.0
+def mutable locked = #false
+def mutable x_offset = 0.0
+def mutable y_offset = 0.0
+
+fun setup():
+  size(640, 360)
+  bx := width / 2.0
+  by := height / 2.0
+  rect_mode(#'radius)
+
+fun in_the_box(x, y):
+  x > bx - box_size && x < bx + box_size
+    && y > by - box_size && y < by + box_size
+
+fun draw():
+  background(0)
+  cond
+  | in_the_box(mouse_x, mouse_y) && locked:
+      stroke(255)
+      fill(255)
+  | in_the_box(mouse_x, mouse_y):
+      stroke(255)
+      fill(153)
+  | ~else:
+      stroke(153)
+      fill(153)
+  rect(bx, by, box_size, box_size)
+
+fun on_mouse_pressed():
+  locked := in_the_box(mouse_x, mouse_y)
+  x_offset := mouse_x - bx
+  y_offset := mouse_y - by
+
+fun on_mouse_dragged():
+  when locked
+  | bx := mouse_x - x_offset
+    by := mouse_y - y_offset
+
+fun on_mouse_released():
+  locked := #false
