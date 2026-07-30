@@ -7,7 +7,8 @@ fun star(cx, cy, r_outer, r_inner, n_points):
   def mutable i = 0
   while i < n_points * 2:
     let ang = -pi / 2.0 + i * pi / n_points
-    let r = if math.modulo(i, 2) == 0 | r_outer | r_inner
+    // Rhombus: remainder is infix `mod`, not math.modulo
+    let r = if (i mod 2) == 0 | r_outer | r_inner
     vertex(cx + r * math.cos(ang), cy + r * math.sin(ang))
     i := i + 1
   end_shape(#'close)

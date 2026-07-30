@@ -16,7 +16,7 @@ fun setup():
 
 fun draw():
   background(51)
-  when math.modulo(frame_count, 60) == 0
+  when (frame_count mod 60) == 0
   | jitter := random(-0.1, 0.1)
   angle := angle + jitter
   let c = math.cos(angle)

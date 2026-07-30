@@ -28,7 +28,7 @@ fun on_key_pressed():
                     | code
         when lower >= Char.to_int(Char"a") && lower <= Char.to_int(Char"z")
         | let key_index = lower - Char.to_int(Char"a")
-          fill(math.modulo(frame_count * 7, 255))
+          fill((frame_count * 7) mod 255)
           let x = remap(key_index, 0, 25, 0, width - rect_width)
           rect(x, 0, rect_width, height)
         | ~else:
