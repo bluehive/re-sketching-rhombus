@@ -1,6 +1,7 @@
-*~
-compiled/
-*.zo
+*#*
 *.dep
-.codebase-memory/
+*.zo
+*~
 .DS_Store
+.codebase-memory/
+compiled/
