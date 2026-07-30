@@ -56,10 +56,21 @@ description = "Compile library and example modules"
 run = """
 #!/usr/bin/env bash
 set -euo pipefail
-raco make re-sketching-lib/re_sketching/main.rkt
-for f in examples/test/sketch*.rkt; do
-  echo "compiling $f"
-  raco make "$f" || racket -l errortrace -t "$f" -- --check 2>/dev/null || true
-done
+if [[ -d "${HOME}/.local/share/mise/installs/racket/8.18/bin" ]]; then
+  export PATH="${HOME}/.local/share/mise/installs/racket/8.18/bin:${PATH}"
+fi
+raco make re-sketching-lib/re_sketching/rhombus_lang.rkt
+echo "racket $(racket --version)"
 echo "check done"
+"""
+
+[tasks.drracket]
+description = "Launch DrRacket 8.18 (not system 8.10). Args: optional files"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+export PATH="${HOME}/.local/share/mise/installs/racket/8.18/bin:${PATH}"
+echo "Using: $(which drracket)"
+echo "Racket: $(racket --version)"
+exec drracket "$@"
 """

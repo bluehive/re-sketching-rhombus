@@ -17,15 +17,27 @@
 
 ## 必要環境
 
-- **Racket ≥ 8.14**（Rhombus 用。mise で `racket = "8.18"` を推奨）
-- パッケージ: `rhombus`（および draw / gui）
+- **Racket ≥ 8.14**（Rhombus 用。mise で `racket = "8.18"` を**必須**に近い）
+- パッケージ: `rhombus` / `shrubbery`（および draw / gui）
+
+### 重要: システム Racket 8.10 では動かない
+
+Ubuntu 等に入っている **DrRacket 8.10** では `#lang re_sketching`（Rhombus 表面）は実行できません。  
+`shrubbery` / `rhombus` は **8.18 側のパッケージ領域**に入っており、8.10 からは見えません。また公式 Rhombus も base ≥ 8.14 を要求します。
+
+| 使い方 | コマンド / 手順 |
+|--------|----------------|
+| CLI | `export PATH="$HOME/.local/share/mise/installs/racket/8.18/bin:$PATH"` のあと `racket examples/test/sketch1.rhm` |
+| DrRacket | **8.18 付属の** `drracket` を起動する（下参照）。メニューの 8.10 版は使わない |
+| S 式だけ 8.10 で試す | `#lang re_sketching/racket`（`shrubbery` 不要。ただし 8.10 に `re-sketching-lib` が入っている必要あり） |
 
 ```bash
 # mise 利用時
 mise install
 eval "$(mise activate bash)"   # または mise の shims を PATH に
 
-# ローカルに rhombus がある場合の例
+# ローカルに rhombus がある場合の例（必ず 8.18 の raco で）
+export PATH="$HOME/.local/share/mise/installs/racket/8.18/bin:$PATH"
 raco pkg install --auto --link \
   ~/my-project/rhombus/shrubbery-lib \
   ~/my-project/rhombus/enforest-lib \
@@ -36,6 +48,25 @@ raco pkg install --auto --link \
 
 raco pkg install --auto --link re-sketching-lib re-sketching
 ```
+
+### DrRacket（8.18）で最小例を開く
+
+```bash
+export PATH="$HOME/.local/share/mise/installs/racket/8.18/bin:$PATH"
+# バージョン確認 → 8.18 であること
+racket --version
+drracket ~/my-project/re-sketching-rhombus/examples/test/sketch6.rhm
+```
+
+または:
+
+```bash
+cd ~/my-project/re-sketching-rhombus
+mise run drracket -- examples/test/sketch6.rhm
+```
+
+起動後、ウィンドウ下部に **「ようこそ DrRacket, バージョン 8.18」** と出ていることを確認してください。  
+**8.10** のままなら、別バイナリ（`/usr/bin/drracket`）が起動しています。
 
 ## クイックスタート
 
