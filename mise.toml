@@ -1,0 +1,58 @@
+# re-sketching-rhombus toolchain
+# Rhombus packages require Racket ≥ 8.14; pin a modern Racket via mise.
+
+[tools]
+racket = "8.18"
+
+[env]
+_.path = ["{{config_root}}/bin"]
+
+[tasks.install]
+description = "Link local packages and install rhombus deps when available"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+# Prefer mise racket if present
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate bash)"
+fi
+raco pkg install --auto --skip-installed \
+  --name re-sketching-lib "$ROOT/re-sketching-lib" \
+  --name re-sketching "$ROOT/re-sketching" || true
+raco pkg update --link "$ROOT/re-sketching-lib" "$ROOT/re-sketching" 2>/dev/null || \
+  raco pkg install --auto --link "$ROOT/re-sketching-lib" "$ROOT/re-sketching"
+# Optional Rhombus stack
+raco pkg install --auto --skip-installed rhombus rhombus-draw rhombus-gui 2>/dev/null || \
+  echo "note: rhombus not installed yet (need Racket >= 8.14)"
+"""
+
+[tasks.examples]
+description = "List test sketches"
+run = "ls -1 examples/test"
+
+[tasks.run-sketch]
+description = "Run a sketch, e.g. mise run run-sketch -- sketch1"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+NAME="${1:-sketch1}"
+FILE="examples/test/${NAME}.rkt"
+if [[ ! -f "$FILE" ]]; then
+  FILE="examples/test/${NAME}.rhm"
+fi
+exec racket "$FILE"
+"""
+
+[tasks.check]
+description = "Compile library and example modules"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+raco make re-sketching-lib/re_sketching/main.rkt
+for f in examples/test/sketch*.rkt; do
+  echo "compiling $f"
+  raco make "$f" || racket -l errortrace -t "$f" -- --check 2>/dev/null || true
+done
+echo "check done"
+"""

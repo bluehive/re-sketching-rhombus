@@ -1,0 +1,26 @@
+// Target Rhombus surface (Phase 3).
+// Requires Racket >= 8.14 and `raco pkg install rhombus`,
+// plus a shrubbery-backed #lang re_sketching reader.
+// Until then, use sketch1.rkt.
+//
+// Intended shape:
+//
+// #lang re_sketching
+//
+// fun setup():
+//   size(600, 400)
+//   frame_rate(30)
+//
+// fun draw():
+//   background(125)
+//   fill("green")
+//   stroke("red")
+//   circle(width/2, height/2, 30)
+//
+// fun on_mouse_pressed():
+//   match mouse_button
+//   | #'left: fill(255)
+//   | #'right: fill(0)
+
+#lang racket/base
+(error 'sketch1.rhm "Rhombus surface not enabled yet; run sketch1.rkt")

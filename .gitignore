@@ -1,0 +1,6 @@
+*~
+compiled/
+*.zo
+*.dep
+.codebase-memory/
+.DS_Store
