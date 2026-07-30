@@ -1,6 +1,7 @@
 **re-sketching-rhombus**
 
 - [Home](Home)
+- [Rhombus Essentials](Rhombus-Essentials)
 - [Cheat Sheet](Cheat-Sheet)
 - [Examples](Examples)
   - [Color](Examples-Color)

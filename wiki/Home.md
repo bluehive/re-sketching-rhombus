@@ -5,6 +5,7 @@
 
 | ページ | 内容 |
 |--------|------|
+| [Rhombus Essentials](Rhombus-Essentials) | Rhombus 基本文法・シンタックス（[公式 Essentials](https://docs.racket-lang.org/rhombus-guide/Rhombus_Essentials.html) 要約） |
 | [Cheat Sheet](Cheat-Sheet) | 関数一覧のクイックリファレンス（[Sketching Overview](https://docs.racket-lang.org/manual-sketching/overview.html) 相当） |
 | [Examples](Examples) | 描写サンプル（[Sketching Examples](https://docs.racket-lang.org/manual-sketching/Examples.html) 相当） |
 | [Drawing Primitives](Drawing-Primitives) | `point` / `line` / `ellipse` / `circle` / `arc` / `rect` / `square` / `quad` / `triangle` |

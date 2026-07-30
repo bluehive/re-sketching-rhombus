@@ -39,6 +39,6 @@ if git diff --cached --quiet; then
 fi
 git -c user.email="${GIT_AUTHOR_EMAIL:-wiki-bot@users.noreply.github.com}" \
     -c user.name="${GIT_AUTHOR_NAME:-re-sketching-wiki}" \
-    commit -m "docs: sync drawing API wiki from repository wiki/"
+    commit -m "docs: sync wiki from repository wiki/"
 git push origin HEAD
 echo "Published wiki from $WIKI_SRC"
