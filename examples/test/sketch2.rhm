@@ -1,0 +1,29 @@
+#lang re_sketching
+// Bouncing ball animation.
+
+fun setup():
+  size(600, 400)
+  frame_rate(30)
+
+def mutable x = 0
+def mutable y = 200
+def mutable v = 1.0
+def mutable a = 0.1
+
+fun next():
+  x := x + 1
+  y := y + v
+  v := v + a
+  when y >= height
+  | y := height
+    v := -5.0
+  when y <= 0
+  | y := 0
+    v := 0.1
+
+fun draw():
+  next()
+  stroke("black")
+  fill("yellow")
+  no_fill()
+  circle(x, y, 20)

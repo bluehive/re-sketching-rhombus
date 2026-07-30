@@ -1,0 +1,14 @@
+#lang re_sketching
+// mouse_pressed system variable (boolean).
+
+fun setup():
+  frame_rate(30)
+  size(480, 120)
+
+fun draw():
+  if mouse_pressed
+  | stroke(255)
+    fill(255)
+  | stroke(0)
+    fill(0)
+  ellipse(mouse_x, mouse_y, 40, 40)

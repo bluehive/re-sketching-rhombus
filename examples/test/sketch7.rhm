@@ -1,0 +1,10 @@
+#lang re_sketching
+// Cursor changes with mouse position.
+
+fun setup():
+  size(600, 400)
+
+fun draw():
+  if mouse_x < 300
+  | cursor(#'cross)
+  | cursor(#'hand)

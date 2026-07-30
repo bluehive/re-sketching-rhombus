@@ -1,4 +1,4 @@
-#lang re_sketching
+#lang re_sketching/racket
 ;; Placeholder (image loading deferred).
 
 (define (setup)

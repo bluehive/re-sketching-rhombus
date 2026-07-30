@@ -1,4 +1,4 @@
-#lang re_sketching
+#lang re_sketching/racket
 ;; Matrix stack: translate + push/pop.
 
 (define (setup)

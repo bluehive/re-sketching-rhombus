@@ -32,16 +32,23 @@ description = "List test sketches"
 run = "ls -1 examples/test"
 
 [tasks.run-sketch]
-description = "Run a sketch, e.g. mise run run-sketch -- sketch1"
+description = "Run a sketch, e.g. mise run run-sketch -- sketch1 (prefers .rhm)"
 run = """
 #!/usr/bin/env bash
 set -euo pipefail
-NAME="${1:-sketch1}"
-FILE="examples/test/${NAME}.rkt"
-if [[ ! -f "$FILE" ]]; then
-  FILE="examples/test/${NAME}.rhm"
+# Prefer mise Racket 8.18+ for Rhombus
+if [[ -d "${HOME}/.local/share/mise/installs/racket/8.18/bin" ]]; then
+  export PATH="${HOME}/.local/share/mise/installs/racket/8.18/bin:${PATH}"
 fi
-exec racket "$FILE"
+NAME="${1:-sketch1}"
+if [[ -f "examples/test/${NAME}.rhm" ]]; then
+  exec racket "examples/test/${NAME}.rhm"
+elif [[ -f "examples/test/${NAME}.rkt" ]]; then
+  exec racket "examples/test/${NAME}.rkt"
+else
+  echo "not found: ${NAME}" >&2
+  exit 1
+fi
 """
 
 [tasks.check]

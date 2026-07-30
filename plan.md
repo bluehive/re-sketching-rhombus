@@ -50,11 +50,12 @@ Surface is **`#lang re_sketching`**: preferred form is Rhombus/shrubbery when `r
 - [x] sketch1–9 as `.rkt` (compile-checked; visual run)
 - [x] Handler names: `on-mouse-*` / `on-key-*`
 
-### Phase 3 — Rhombus surface (in progress)
-- [ ] Install Racket ≥8.14 + rhombus via mise (install running / pending)
-- [ ] `#lang re_sketching` shrubbery reader
-- [x] sketch1.rhm placeholder documenting intended syntax
-- [ ] Optional: wire `rhombus/draw` / `rhombus/gui` backends later
+### Phase 3 — Rhombus surface ✅
+- [x] Install Racket ≥8.14 + rhombus (mise racket@8.18 + local rhombus link)
+- [x] `#lang re_sketching` shrubbery reader (`rhombus_lang.rkt` + `lang/reader.rkt`)
+- [x] sketch1–9 as `.rhm` (auto setup/draw; smoke-run OK)
+- [x] Keep `#lang re_sketching/racket` for S-expression surface
+- [ ] Optional later: wire `rhombus/draw` / `rhombus/gui` backends
 
 ### Phase 4 — Polish
 - [x] README usage

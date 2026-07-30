@@ -6,7 +6,9 @@
   '("base"
     "draw-lib"
     "gui-lib"
-    "math-lib"))
+    "math-lib"
+    "rhombus-lib"
+    "shrubbery-lib"))
 
 (define build-deps '())
 
@@ -14,6 +16,8 @@
 
 (define pkg-authors '(bluehive grok))
 
-(define version "0.1")
+(define version "0.2")
 
 (define license 'MIT)
+
+(define language-families '("Rhombus"))

@@ -1,4 +1,4 @@
-#lang re_sketching
+#lang re_sketching/racket
 ;; Distance field of ellipses following the mouse.
 
 (define diagonal (dist 0 0 640 360))

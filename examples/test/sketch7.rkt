@@ -1,4 +1,4 @@
-#lang re_sketching
+#lang re_sketching/racket
 ;; Cursor changes with mouse position.
 
 (define (setup)

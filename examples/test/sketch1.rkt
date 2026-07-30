@@ -1,4 +1,4 @@
-#lang re_sketching
+#lang re_sketching/racket
 ;; Equivalent of sketching-examples/test/sketch1 (rewritten).
 ;; Implemented by Grok.
 

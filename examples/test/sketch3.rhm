@@ -1,0 +1,17 @@
+#lang re_sketching
+// Distance field of ellipses following the mouse.
+
+def diagonal = dist(0, 0, 640, 360)
+
+fun setup():
+  size(640, 360)
+
+fun draw():
+  background(255)
+  stroke(0)
+  fill(0)
+  for i in 0..width+1 ~step 20:
+    for j in 0..height+1 ~step 20:
+      let size = dist(mouse_x, mouse_y, i, j)
+      let s = 66 * (size / diagonal)
+      ellipse(i, j, s, s)

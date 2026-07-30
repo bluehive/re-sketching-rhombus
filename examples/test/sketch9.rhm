@@ -1,0 +1,10 @@
+#lang re_sketching
+// pmouse trail.
+
+fun setup():
+  size(600, 600)
+
+fun draw():
+  stroke(0)
+  stroke_weight(5)
+  line(pmouse_x, pmouse_y, mouse_x, mouse_y)
