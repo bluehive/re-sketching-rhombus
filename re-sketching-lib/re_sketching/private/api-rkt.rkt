@@ -11,7 +11,7 @@
 
 (provide
  ;; boot
- initialize go start lookup-proc
+ initialize go go-with start lookup-proc
  ;; graphics
  background fill no-fill stroke no-stroke
  stroke-weight stroke-cap stroke-join
@@ -32,7 +32,7 @@
  cursor no-cursor focused? fullscreen set-title
  actual-frame-rate
  set-frame-rate!
- ;; state getters (for Rhombus expr macros / fun wrappers)
+ ;; state getters
  get-width get-height get-frame-count
  get-mouse-x get-mouse-y get-pmouse-x get-pmouse-y
  get-mouse-pressed get-mouse-button

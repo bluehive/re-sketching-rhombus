@@ -1,10 +1,16 @@
 #lang rhombus
 // #lang re_sketching language module (Rhombus surface)
 // Implemented by Grok (xAI).
+//
+// Rhombus funs are invisible to namespace-variable-value. We extract the
+// Identifier nodes from user `fun setup`/`fun draw` forms (correct scopes)
+// and pass those procedures into api.go-with.
 
 import:
   rhombus/meta open
   lib("re_sketching/private/api-rkt.rkt") as api
+  meta:
+    lib("re_sketching/private/intro.rkt") as intro
 
 module configure_runtime ~lang rhombus:
   import: lib("rhombus/runtime_config.rhm")
@@ -14,13 +20,11 @@ module configure_expand ~lang rhombus:
   import: lib("rhombus/expand_config.rhm")
   export: all_from(.expand_config)
 
-
 export:
   all_from(rhombus):
     except #%module_block
   rename:
     re_sketching_module_block as #%module_block
-  // graphics
   rename:
     api.background as background
     api.fill as fill
@@ -42,7 +46,6 @@ export:
     api.quad as quad
     api.triangle as triangle
     api.color as color
-  // transform
   rename:
     api.translate as translate
     api.rotate as rotate
@@ -50,7 +53,6 @@ export:
     api.#{push-matrix} as push_matrix
     api.#{pop-matrix} as pop_matrix
     api.#{reset-matrix} as reset_matrix
-  // math
   rename:
     api.dist as dist
     api.lerp as lerp
@@ -63,7 +65,6 @@ export:
     api.degrees as degrees
     api.pi as pi
     api.random as random
-  // environment
   rename:
     api.size as size
     api.#{pixel-density} as pixel_density
@@ -75,7 +76,6 @@ export:
     api.#{no-cursor} as no_cursor
     api.fullscreen as fullscreen
     api.#{set-title} as set_title
-  // system variables + focused
   width
   height
   frame_count
@@ -137,12 +137,75 @@ expr.macro 'pixel_height':
 fun focused():
   api.#{focused?}()
 
+meta:
+  // Return the Identifier syntax for `fun <name> ...` if present
+  fun find_fun_id(forms :: List, want :: Symbol):
+    for values(found = #false):
+      each f in forms
+      block:
+        let id:
+          match f
+          | 'fun $(name :: Identifier) $_ ...': name
+          | ~else: #false
+        if id && (Syntax.unwrap(id) == want) | id | found
+
+  fun cid(ctx, name :: Symbol):
+    intro.#{contextual-id}(ctx, name)
+
 decl.macro 're_sketching_module_block:
               $form
               ...':
+  let forms = [form, ...]
+  let ctx:
+    match forms
+    | [f, & _]: f
+    | []: #'here
+  // Prefer Identifier extracted from user `fun` (correct scopes);
+  // otherwise introduce a contextual id + no-op default.
+  let setup_id = find_fun_id(forms, #'setup) || cid(ctx, #'setup)
+  let draw_id = find_fun_id(forms, #'draw) || cid(ctx, #'draw)
+  let omp = find_fun_id(forms, #'on_mouse_pressed) || cid(ctx, #'on_mouse_pressed)
+  let omr = find_fun_id(forms, #'on_mouse_released) || cid(ctx, #'on_mouse_released)
+  let omm = find_fun_id(forms, #'on_mouse_moved) || cid(ctx, #'on_mouse_moved)
+  let omd = find_fun_id(forms, #'on_mouse_dragged) || cid(ctx, #'on_mouse_dragged)
+  let okp = find_fun_id(forms, #'on_key_pressed) || cid(ctx, #'on_key_pressed)
+  let okr = find_fun_id(forms, #'on_key_released) || cid(ctx, #'on_key_released)
+  let orz = find_fun_id(forms, #'on_resize) || cid(ctx, #'on_resize)
+  let need_setup = !find_fun_id(forms, #'setup)
+  let need_draw = !find_fun_id(forms, #'draw)
+  let need_omp = !find_fun_id(forms, #'on_mouse_pressed)
+  let need_omr = !find_fun_id(forms, #'on_mouse_released)
+  let need_omm = !find_fun_id(forms, #'on_mouse_moved)
+  let need_omd = !find_fun_id(forms, #'on_mouse_dragged)
+  let need_okp = !find_fun_id(forms, #'on_key_pressed)
+  let need_okr = !find_fun_id(forms, #'on_key_released)
+  let need_orz = !find_fun_id(forms, #'on_resize)
+  // Build default defs only for missing names
+  let [d_stx, ...] = for List (pair in [[need_setup, setup_id],
+                                        [need_draw, draw_id],
+                                        [need_omp, omp],
+                                        [need_omr, omr],
+                                        [need_omm, omm],
+                                        [need_omd, omd],
+                                        [need_okp, okp],
+                                        [need_okr, okr],
+                                        [need_orz, orz]]):
+                       keep_when pair[0]
+                       let id = pair[1]
+                       'fun $id(): #void'
   '#%module_block:
      api.initialize()
      $form
      ...
-     api.go()
+     $d_stx
+     ...
+     api.#{go-with}($setup_id,
+                    $draw_id,
+                    $omp,
+                    $omr,
+                    $omm,
+                    $omd,
+                    $okp,
+                    $okr,
+                    $orz)
 '

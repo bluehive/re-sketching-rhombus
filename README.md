@@ -104,6 +104,27 @@ fun draw():
 
 （真偽値のシステム変数 `mouse_pressed` との衝突を避けるためです。Racket 表面ではハイフン形 `on-mouse-pressed` も可。）
 
+### インデントに注意（Rhombus）
+
+`draw` / `setup` の中身は **必ずその関数のブロック内**（`:` の下に字下げ）に書いてください。  
+行頭に戻ったコメントや文は **関数の外**（モジュール先頭）として実行され、毎フレーム再描画されません。
+
+```rhombus
+// NG: line/ellipse が draw の外
+fun draw():
+  background(128)
+
+// ここは draw の外
+stroke(200)
+line(0, height/2, width, height/2)
+
+// OK
+fun draw():
+  background(128)
+  stroke(200)
+  line(0, height/2, width, height/2)
+```
+
 ### システム変数（括弧なしの識別子）
 
 `width`, `height`, `frame_count`, `mouse_x`, `mouse_y`, `pmouse_x`, `pmouse_y`,  
