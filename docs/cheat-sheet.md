@@ -104,6 +104,15 @@
 | `arc` · `circle` · `ellipse` · `line` · `point` |
 | `quad` · `rect` · `square` · `triangle` |
 
+### Curves & vertices
+
+| Rhombus | Racket |
+|---------|--------|
+| `bezier` | `bezier` |
+| `begin_shape` · `vertex` · `end_shape` | `begin-shape` · `vertex` · `end-shape` |
+
+`end_shape(#'close)` で閉じる。`begin_shape` の kind: 省略 / `#'default` · `#'points` · `#'lines` · `#'triangles`
+
 ### Modes
 
 | Rhombus | Racket |
@@ -137,6 +146,14 @@ join: `#'miter` · `#'bevel` · `#'round`
 ### Calculation
 
 `dist` · `lerp` · `constrain` · `norm` · `remap` · `mag` · `sq` · `random`
+
+### Noise
+
+| Rhombus | Racket |
+|---------|--------|
+| `noise` · `noise_seed` · `noise_detail` | `noise` · `noise-seed` · `noise-detail` |
+
+`noise(x)` / `noise(x, y)` / `noise(x, y, z)` → おおよそ `[0, 1]` の滑らかな値。
 
 ### Trigonometry helpers
 

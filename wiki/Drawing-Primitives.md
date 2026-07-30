@@ -273,6 +273,81 @@ triangle(10, 10, 20, 20, 0, 50)
 
 ---
 
+## bezier
+
+3 次ベジェ曲線（始点 → 制御点1 → 制御点2 → 終点）。
+
+### Rhombus
+
+```rhombus
+bezier(x1, y1, x2, y2, x3, y3, x4, y4)
+```
+
+### Racket
+
+```racket
+(bezier x1 y1 x2 y2 x3 y3 x4 y4)
+```
+
+### 例
+
+```rhombus
+no_fill()
+stroke(255)
+bezier(80, 180, mouse_x, mouse_y, 400, 50, 560, 180)
+```
+
+ファイル: `examples/manual/form/bezier.rhm`
+
+---
+
+## begin_shape / vertex / end_shape
+
+自由形状。`begin_shape` のあと `vertex` を並べ、`end_shape` で描画します。
+
+### Rhombus
+
+```rhombus
+begin_shape()                 // または begin_shape(#'points) など
+vertex(x, y)
+// ...
+end_shape()                   // 開いた折れ線
+end_shape(#'close)            // 閉じた多角形
+```
+
+### Racket
+
+```racket
+(begin-shape)
+(begin-shape 'points)
+(vertex x y)
+(end-shape)
+(end-shape 'close)
+```
+
+### kind（任意）
+
+| kind | 意味 |
+|------|------|
+| 省略 / `#'default` | 折れ線・多角形（パス） |
+| `#'points` | 各頂点を点で描画 |
+| `#'lines` | 2 点ずつ線分 |
+| `#'triangles` | 3 点ずつ三角形 |
+
+### 例
+
+```rhombus
+begin_shape()
+vertex(50, 50)
+vertex(150, 50)
+vertex(100, 150)
+end_shape(#'close)
+```
+
+ファイル: `examples/manual/form/begin-shape.rhm` · `examples/manual/form/regular-polygons.rhm`
+
+---
+
 ## 関連
 
 - 色・線・モード: [Color and Style](Color-and-Style)

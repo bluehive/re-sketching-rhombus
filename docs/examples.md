@@ -10,7 +10,8 @@ racket examples/manual/<category>/<name>.rhm
 
 Wiki: [Examples](https://github.com/bluehive/re-sketching-rhombus/wiki/Examples)
 
-未移植（API 未実装）: Typography / Image / 一部 Color(HSB) / Bezier / begin_shape / millis 依存の厳密移植 など。
+未移植・差分: Typography / Image / 一部 Color(HSB) / millis 依存の厳密移植 など。  
+**実装済みの追加例:** `bezier` · `begin_shape` / `vertex` · `noise`（下記 Form / Math）。
 
 ## Color
 
@@ -43,19 +44,22 @@ Wiki: [Examples](https://github.com/bluehive/re-sketching-rhombus/wiki/Examples)
 
 ## Form
 
-基本図形・円グラフ・正多角形。
+基本図形・円グラフ・正多角形・曲線・頂点。
 
 - **[Points and Lines](examples/form.md#points-and-lines)** — `point` と `line` による基本幾何。 (`examples/manual/form/points-and-lines.rhm`)
 - **[Pie Chart](examples/form.md#pie-chart)** — `arc` と角度データから円グラフ。 (`examples/manual/form/pie-chart.rhm`)
-- **[Regular Polygons](examples/form.md#regular-polygons)** — 正多角形を `triangle` 扇で描き回転（`begin_shape` 未実装のため近似）。 (`examples/manual/form/regular-polygons.rhm`)
+- **[Regular Polygons](examples/form.md#regular-polygons)** — `begin_shape` / `vertex` で正多角形を描き回転。 (`examples/manual/form/regular-polygons.rhm`)
+- **[Bezier](../examples/manual/form/bezier.rhm)** — 3 次ベジェ曲線（マウスが制御点）。 (`examples/manual/form/bezier.rhm`)
+- **[Begin Shape](../examples/manual/form/begin-shape.rhm)** — 星形・折れ線・points モード。 (`examples/manual/form/begin-shape.rhm`)
 
 ## Math
 
-距離・写像・三角関数・極座標。
+距離・写像・三角関数・極座標・ノイズ。
 
 - **[Distance 2D](examples/math.md#distance-2d)** — マウスからの距離で楕円サイズが変わる距離場。 (`examples/manual/math/distance-2d.rhm`)
 - **[Remap](examples/math.md#remap)** — `mouse_x` を色と直径に写像。 (`examples/manual/math/remap.rhm`)
 - **[Sine](examples/math.md#sine)** — `sin` で直径が脈動する 3 円。 (`examples/manual/math/sine.rhm`)
 - **[Sine Cosine](examples/math.md#sine-cosine)** — sin/cos で中心矩形の周囲を回る円。 (`examples/manual/math/sine-cosine.rhm`)
 - **[Sine Wave](examples/math.md#sine-wave)** — 横並びの円でサイン波をアニメーション。 (`examples/manual/math/sine-wave.rhm`)
+- **[Noise Wave](../examples/manual/math/noise-wave.rhm)** — 1D Perlin `noise` で波を揺らす。 (`examples/manual/math/noise-wave.rhm`)
 - **[Polar to Cartesian](examples/math.md#polar-to-cartesian)** — 極座標 `(r, θ)` を直交座標へ変換して公転。 (`examples/manual/math/polar-to-cartesian.rhm`)

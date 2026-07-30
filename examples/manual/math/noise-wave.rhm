@@ -1,0 +1,28 @@
+#lang re_sketching
+// Noise Wave.
+// 1D Perlin noise で横並びの円を上下に揺らす。
+// Processing noise() 相当。sine-wave のノイズ版。
+
+def x_spacing = 16.0
+def mutable t = 0.0
+def amplitude = 80.0
+
+fun setup():
+  size(640, 360)
+  frame_rate(60)
+  noise_seed(42)
+  noise_detail(4, 0.5)
+
+fun draw():
+  background(0)
+  no_stroke()
+  fill(255)
+  def mutable xoff = t
+  def mutable x = 0.0
+  while x <= width:
+    let n = noise(xoff)
+    let y = height / 2.0 + (n - 0.5) * 2.0 * amplitude
+    ellipse(x, y, 14, 14)
+    xoff := xoff + 0.05
+    x := x + x_spacing
+  t := t + 0.02

@@ -47,6 +47,8 @@
 
 **2D Primitives:** [arc](Drawing-Primitives#arc) · [circle](Drawing-Primitives#circle) · [ellipse](Drawing-Primitives#ellipse) · [line](Drawing-Primitives#line) · [point](Drawing-Primitives#point) · [quad](Drawing-Primitives#quad) · [rect](Drawing-Primitives#rect) · [square](Drawing-Primitives#square) · [triangle](Drawing-Primitives#triangle)
 
+**Curves & vertices:** [bezier](Drawing-Primitives#bezier) · [begin_shape](Drawing-Primitives#begin_shape--vertex--end_shape) · [vertex](Drawing-Primitives#begin_shape--vertex--end_shape) · [end_shape](Drawing-Primitives#begin_shape--vertex--end_shape)
+
 **Modes:** [ellipse_mode](Color-and-Style#ellipse_mode--rect_mode) · [rect_mode](Color-and-Style#ellipse_mode--rect_mode)
 
 **Stroke:** [stroke_cap](Color-and-Style#stroke_cap) · [stroke_join](Color-and-Style#stroke_join) · [stroke_weight](Color-and-Style#stroke_weight)
@@ -62,6 +64,8 @@
 ## Math
 
 **Calculation:** [dist](Math#dist) · [lerp](Math#lerp) · [constrain](Math#constrain) · [norm](Math#norm) · [remap](Math#remap) · [mag](Math#mag) · [sq](Math#sq) · [random](Math#random)
+
+**Noise:** [noise](Math#noise) · [noise_seed](Math#noise) · [noise_detail](Math#noise)
 
 **Angle:** [radians](Math#radians) · [degrees](Math#degrees)
 

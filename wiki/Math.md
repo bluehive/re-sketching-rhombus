@@ -128,6 +128,42 @@ random(10, 20)
 
 ---
 
+## noise
+
+Perlin 風の滑らかなノイズ（1–3 次元）。戻り値はおおよそ **0–1**。
+
+### Rhombus
+
+```rhombus
+noise(x)
+noise(x, y)
+noise(x, y, z)
+noise_seed(42)
+noise_detail(4)           // オクターブ数
+noise_detail(4, 0.5)      // オクターブ, falloff
+```
+
+### Racket
+
+```racket
+(noise x)
+(noise x y)
+(noise x y z)
+(noise-seed 42)
+(noise-detail 4 0.5)
+```
+
+### 例
+
+```rhombus
+let n = noise(frame_count * 0.01)
+let y = height / 2.0 + (n - 0.5) * 100
+```
+
+ファイル: `examples/manual/math/noise-wave.rhm`
+
+---
+
 ## radians / degrees
 
 度 ↔ ラジアン。

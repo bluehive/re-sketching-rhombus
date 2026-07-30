@@ -2,6 +2,7 @@
 // Sine Wave.
 // 横に並んだ円でサイン波をアニメーション。
 // Original: Processing SineWave / Sketching sine-wave
+// ノイズ版: examples/manual/math/noise-wave.rhm
 
 def x_spacing = 16.0
 def mutable w = 0.0

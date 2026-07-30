@@ -45,6 +45,10 @@ export:
     api.square as square
     api.quad as quad
     api.triangle as triangle
+    api.bezier as bezier
+    api.#{begin-shape} as begin_shape
+    api.#{end-shape} as end_shape
+    api.vertex as vertex
     api.color as color
   rename:
     api.translate as translate
@@ -65,6 +69,9 @@ export:
     api.degrees as degrees
     api.pi as pi
     api.random as random
+    api.noise as noise
+    api.#{noise-seed} as noise_seed
+    api.#{noise-detail} as noise_detail
   rename:
     api.size as size
     api.#{pixel-density} as pixel_density

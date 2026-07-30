@@ -1,0 +1,28 @@
+#lang re_sketching
+// Bezier.
+// 3 次ベジェ曲線（始点・制御点2つ・終点）。
+// Original: Processing Bezier / Sketching bezier
+
+fun setup():
+  size(640, 360)
+  no_fill()
+  frame_rate(30)
+
+fun draw():
+  background(0)
+  stroke(255)
+  stroke_weight(2)
+  // マウスが一方の制御点
+  bezier(80, height / 2.0,
+         mouse_x, mouse_y,
+         width - mouse_x, height - mouse_y,
+         width - 80, height / 2.0)
+  // 制御点の目印
+  stroke(255, 100)
+  stroke_weight(1)
+  line(80, height / 2.0, mouse_x, mouse_y)
+  line(width - 80, height / 2.0, width - mouse_x, height - mouse_y)
+  fill(255, 0, 0)
+  no_stroke()
+  circle(mouse_x, mouse_y, 8)
+  circle(width - mouse_x, height - mouse_y, 8)

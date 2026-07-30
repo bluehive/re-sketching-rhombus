@@ -13,8 +13,8 @@ racket examples/manual/input/easing.rhm
 | [Color](Examples-Color) | 色の束縛・相対的な見え方・グラデーション。 |
 | [Input](Examples-Input) | マウス・キーボード入力とイベントハンドラ。 |
 | [Transform](Examples-Transform) | 座標変換（translate / scale / rotate）と行列スタック。 |
-| [Form](Examples-Form) | 基本図形・円グラフ・正多角形。 |
-| [Math](Examples-Math) | 距離・写像・三角関数・極座標。 |
+| [Form](Examples-Form) | 基本図形・曲線・頂点・円グラフ・正多角形。 |
+| [Math](Examples-Math) | 距離・写像・三角関数・ノイズ・極座標。 |
 
 ## カテゴリ
 
@@ -45,7 +45,9 @@ racket examples/manual/input/easing.rhm
 
 - **Points and Lines** — `point` と `line` による基本幾何。
 - **Pie Chart** — `arc` と角度データから円グラフ。
-- **Regular Polygons** — 正多角形を `triangle` 扇で描き回転（`begin_shape` 未実装のため近似）。
+- **Regular Polygons** — `begin_shape` / `vertex` で正多角形を描き回転。
+- **Bezier** — 3 次ベジェ曲線。
+- **Begin Shape** — 星形・折れ線・points モード。
 
 ### [Math](Examples-Math)
 
@@ -54,10 +56,12 @@ racket examples/manual/input/easing.rhm
 - **Sine** — `sin` で直径が脈動する 3 円。
 - **Sine Cosine** — sin/cos で中心矩形の周囲を回る円。
 - **Sine Wave** — 横並びの円でサイン波をアニメーション。
+- **Noise Wave** — 1D Perlin `noise` で波を揺らす。
 - **Polar to Cartesian** — 極座標 `(r, θ)` を直交座標へ変換して公転。
 
 ## 注意
 
 - 主表面は Rhombus（`#lang re_sketching`）。
-- HSB `color_mode` / `lerp_color` / `text` / `image` / `bezier` / `begin_shape` / `millis` などは未実装のため、同等の意図で改変している例があります。
+- HSB `color_mode` / `lerp_color` / `text` / `image` / `millis` などは未実装のため、同等の意図で改変している例があります。
+- `bezier` / `begin_shape` / `noise` は実装済み（`examples/manual/form/` · `math/noise-wave.rhm`）。
 - 元: [Sketching manual-examples](https://github.com/soegaard/sketching/tree/main/sketching-doc/sketching-doc/manual-examples) · [Processing Examples](https://processing.org/examples/)

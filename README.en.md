@@ -207,15 +207,21 @@ The first milestone was: *get `setup` / `draw` running, with enough 2D primitive
 | Area | Examples | Notes |
 |------|----------|--------|
 | Color modes | `color_mode` (HSB), `lerp_color`, `hue` / `saturation` / `brightness` | RGB-style interpretation only for now |
-| Curves / vertices | `bezier`, `begin_shape` / `vertex` / `end_shape` | Approximate polygons with `triangle` / `quad`, etc. |
 | Typography | `text`, `text_size`, `text_align`, … | Not implemented |
 | Image / pixels | `image`, `load_image`, `load_pixels`, `set_pixel`, … | Not implemented |
 | Time | `millis`, `year` / `month` / `day` / `hour` / … | Some samples use `frame_count` instead |
-| Noise | `noise`, simplex-noise | Not implemented |
 | Math extras | Sketching-only `+=`, bound `sin`, … | Use Rhombus/Racket standard math |
-| Other | `smoothing` / `no_smooth`, `nap`, `save`, Sketching `class` sugar, … | Missing or replaced by the host language |
+| Other | `smoothing` / `no_smooth`, `nap`, `save`, simplex-noise, Sketching `class` sugar, … | Missing or replaced by the host language |
 
-**Core implemented:** 2D primitives (`point` / `line` / `ellipse` / `circle` / `arc` / `rect` / `square` / `quad` / `triangle`), fill/stroke, transforms, mouse/key + events, `dist` / `lerp` / `constrain` / `remap` / `random`, and more. See [docs/cheat-sheet.md](docs/cheat-sheet.md) and the [Wiki](https://github.com/bluehive/re-sketching-rhombus/wiki).
+**Core implemented:** 2D primitives (`point` / `line` / `ellipse` / `circle` / `arc` / `rect` / `square` / `quad` / `triangle`), **curves/vertices** (`bezier`, `begin_shape` / `vertex` / `end_shape`), **noise** (`noise` / `noise_seed` / `noise_detail`), fill/stroke, transforms, mouse/key + events, `dist` / `lerp` / `constrain` / `remap` / `random`, and more. See [docs/cheat-sheet.md](docs/cheat-sheet.md) and the [Wiki](https://github.com/bluehive/re-sketching-rhombus/wiki).
+
+Curve and noise examples:
+
+```bash
+racket examples/manual/form/bezier.rhm
+racket examples/manual/form/begin-shape.rhm
+racket examples/manual/math/noise-wave.rhm
+```
 
 Manual samples under `examples/manual/` that depend on the above are either **adapted to preserve intent** or **left unported**, as noted in [docs/examples.md](docs/examples.md).
 

@@ -9,6 +9,7 @@
          stroke-weight stroke-cap stroke-join
          ellipse-mode rect-mode
          point line ellipse circle arc rect square quad triangle
+         bezier begin-shape end-shape vertex
          color red green blue alpha)
 
 (define transparent-pen (new pen% [style 'transparent]))
@@ -200,4 +201,85 @@
 (define (triangle x1 y1 x2 y2 x3 y3)
   (apply-style)
   (send (dc) draw-polygon (list (cons x1 y1) (cons x2 y2) (cons x3 y3)))
+  (void))
+
+;;; ---- curves & freeform shapes (Processing-style) ----
+
+(define (bezier x1 y1 x2 y2 x3 y3 x4 y4)
+  (apply-style)
+  (define p (new dc-path%))
+  (send p move-to x1 y1)
+  (send p curve-to x2 y2 x3 y3 x4 y4)
+  (send (dc) draw-path p)
+  (void))
+
+;; Shape stack: each entry is (kind . rev-points) where rev-points is list of (x . y)
+(define shape-stack '())
+
+(define (begin-shape [kind 'default])
+  (define k
+    (cond
+      [(symbol? kind) kind]
+      [else 'default]))
+  (set! shape-stack (cons (cons k '()) shape-stack))
+  (void))
+
+(define (vertex x y)
+  (when (null? shape-stack)
+    (error 'vertex "no active shape (call begin-shape first)"))
+  (define top (car shape-stack))
+  (define kind (car top))
+  (define rev (cdr top))
+  (set! shape-stack
+        (cons (cons kind (cons (cons x y) rev))
+              (cdr shape-stack)))
+  (void))
+
+(define (end-shape [mode #f])
+  (when (null? shape-stack)
+    (error 'end-shape "no active shape (call begin-shape first)"))
+  (define top (car shape-stack))
+  (set! shape-stack (cdr shape-stack))
+  (define kind (car top))
+  (define points (reverse (cdr top)))
+  (define close?
+    (case mode
+      [(close #t) #t]
+      [else #f]))
+  (apply-style)
+  (define d (dc))
+  (define x car)
+  (define y cdr)
+  (cond
+    [(null? points) (void)]
+    [(eq? kind 'points)
+     (for ([p (in-list points)])
+       (send d draw-point (x p) (y p)))]
+    [(eq? kind 'lines)
+     (let loop ([ps points])
+       (unless (or (null? ps) (null? (cdr ps)))
+         (define p (car ps))
+         (define q (cadr ps))
+         (send d draw-line (x p) (y p) (x q) (y q))
+         (loop (cddr ps))))]
+    [(eq? kind 'triangles)
+     (let loop ([ps points])
+       (unless (< (length ps) 3)
+         (define p1 (car ps))
+         (define p2 (cadr ps))
+         (define p3 (caddr ps))
+         (send d draw-polygon
+               (list (cons (x p1) (y p1))
+                     (cons (x p2) (y p2))
+                     (cons (x p3) (y p3))))
+         (loop (cdddr ps))))]
+    [else ; default: polyline / polygon path
+     (define path (new dc-path%))
+     (define p1 (car points))
+     (send path move-to (x p1) (y p1))
+     (for ([p (in-list (cdr points))])
+       (send path line-to (x p) (y p)))
+     (when close?
+       (send path close))
+     (send d draw-path path)])
   (void))

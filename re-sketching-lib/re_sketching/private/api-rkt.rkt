@@ -5,6 +5,7 @@
          "graphics.rkt"
          "transform.rkt"
          "math-lib.rkt"
+         "noise.rkt"
          "gui.rkt"
          "boot.rkt"
          "color.rkt")
@@ -17,6 +18,7 @@
  stroke-weight stroke-cap stroke-join
  ellipse-mode rect-mode
  point line ellipse circle arc rect square quad triangle
+ bezier begin-shape end-shape vertex
  color red green blue alpha
  ;; transform
  translate rotate scale
@@ -26,6 +28,7 @@
  dist lerp constrain remap norm mag sq radians degrees
  pi π pi/2 π/2 pi/4 π/4 2pi 2π
  (rename-out [new-random random])
+ noise noise-seed noise-detail
  ;; env / gui
  size pixel-density
  loop no-loop no-gui
