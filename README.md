@@ -5,6 +5,8 @@
 **Implemented by Grok (xAI).**  
 **ライセンス:** MIT  
 
+[English README](README.en.md)
+
 関連 Issue: [bluehive/mypublish-gameoflife#14](https://github.com/bluehive/mypublish-gameoflife/issues/14)
 
 ## 目標
@@ -183,6 +185,35 @@ racket examples/manual/math/sine-wave.rhm
 - 描画・ウィンドウは当面 **`racket/draw` + `racket/gui`**（イベントループが安定）
 - Rhombus 層は API の再エクスポートと `#%module_block` による setup/draw 自動起動
 - 将来 `rhombus/draw` / `rhombus/gui` バックエンドも検討可能
+
+## 未実装 API と現状の制限
+
+本プロジェクトは Sketching の**フォークではなく**、API を参考にした**ゼロからの再実装**です。  
+最初の目標は「`setup` / `draw` が回り、基本的な 2D 図形・入力・座標変換で sketching-test 相当が動くこと」であり、Sketching / Processing の全 API 網羅は意図的に後回しにしています。
+
+### なぜ未実装があるか
+
+1. **スコープを切っている** — ランタイム（状態・GUI ループ）と Rhombus 表面を先に安定させ、周辺 API は段階的に足す方針です（`plan.md` の Phase 1–3）。
+2. **フォークではない** — Sketching のソースを引き継いでいないため、未使用の大量 API をコピーするのではなく、使うものから実装しています。
+3. **参照実装との差分** — 例やドキュメントは Sketching に揃えていますが、HSB・文字・画像・ベジェなどはまだコアに含めていません。
+4. **回避策があるもの** — 例: グラデーションは `remap` + RGB 補間、正多角形は `triangle` 扇、三角関数は Rhombus の `math.sin` / `math.cos` など。
+
+### 主な未実装（Sketching / Processing 相当）
+
+| 領域 | 例 | 備考 |
+|------|-----|------|
+| 色モード | `color_mode` (HSB), `lerp_color`, `hue` / `saturation` / `brightness` | 現状は RGB 的な解釈のみ |
+| 曲線・頂点 | `bezier`, `begin_shape` / `vertex` / `end_shape` | 多角形は `triangle` / `quad` 等で近似可 |
+| タイポグラフィ | `text`, `text_size`, `text_align`, … | 未実装 |
+| 画像・ピクセル | `image`, `load_image`, `load_pixels`, `set_pixel`, … | 未実装 |
+| 時刻 | `millis`, `year` / `month` / `day` / `hour` / … | `frame_count` で代替する例あり |
+| ノイズ | `noise`, simplex-noise | 未実装 |
+| 数学の一部 | Sketching 専用の `+=` / `sin` 束縛など | Rhombus/Racket 標準を利用 |
+| その他 | `smoothing` / `no_smooth`, `nap`, `save`, Sketching の `class` 糖衣 など | 未実装または言語側で代替 |
+
+**実装済みの中心:** 2D プリミティブ（`point` / `line` / `ellipse` / `circle` / `arc` / `rect` / `square` / `quad` / `triangle`）、fill/stroke、transform、マウス/キーとイベント、`dist` / `lerp` / `constrain` / `remap` / `random` など。一覧は [docs/cheat-sheet.md](docs/cheat-sheet.md) と [Wiki](https://github.com/bluehive/re-sketching-rhombus/wiki) を参照。
+
+マニュアル例（`examples/manual/`）のうち、上記に依存する Sketching 元例は**意図を保った改変**か**未移植**として [docs/examples.md](docs/examples.md) に記載しています。
 
 ## 謝辞
 
