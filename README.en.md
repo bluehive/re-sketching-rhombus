@@ -156,7 +156,8 @@ fun draw():
 |----------|----------|
 | [Cheat Sheet](docs/cheat-sheet.md) | Overview-style function index (Japanese) |
 | [Examples](docs/examples.md) | Sketching Examples–style samples (description + code, Japanese) |
-| [Rhombus Essentials (Wiki)](https://github.com/bluehive/re-sketching-rhombus/wiki/Rhombus-Essentials) | Rhombus basic syntax (Japanese summary of the official guide) |
+| [Rhombus Essentials (Wiki)](https://github.com/bluehive/re-sketching-rhombus/wiki/Rhombus-Essentials) | Rhombus syntax guide (Japanese) |
+| [Rhombus Cheat Sheet (Wiki)](https://github.com/bluehive/re-sketching-rhombus/wiki/Rhombus-Cheat-Sheet) | Rhombus syntax quick reference (Japanese) |
 | [GitHub Wiki](https://github.com/bluehive/re-sketching-rhombus/wiki) | Drawing API, Rhombus syntax, and samples |
 | `wiki/*.md` | Wiki source (in-repo mirror) |
 | `scripts/publish-wiki.sh` | Sync `wiki/` → GitHub Wiki |

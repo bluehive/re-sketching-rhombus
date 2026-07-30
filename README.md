@@ -154,7 +154,8 @@ fun draw():
 |------|------|
 | [Cheat Sheet](docs/cheat-sheet.md) | Sketching Overview 風の関数一覧 |
 | [Examples](docs/examples.md) | Sketching Examples 風の描写サンプル（説明 + コード） |
-| [Rhombus Essentials (Wiki)](https://github.com/bluehive/re-sketching-rhombus/wiki/Rhombus-Essentials) | Rhombus 基本文法・シンタックス |
+| [Rhombus Essentials (Wiki)](https://github.com/bluehive/re-sketching-rhombus/wiki/Rhombus-Essentials) | Rhombus 基本文法の解説 |
+| [Rhombus Cheat Sheet (Wiki)](https://github.com/bluehive/re-sketching-rhombus/wiki/Rhombus-Cheat-Sheet) | Rhombus 文法のクイックリファレンス |
 | [GitHub Wiki](https://github.com/bluehive/re-sketching-rhombus/wiki) | 描写 API・Rhombus 文法・サンプルの詳細 |
 | `wiki/*.md` | Wiki のソース（リポジトリ内ミラー） |
 | `scripts/publish-wiki.sh` | `wiki/` → GitHub Wiki へ同期 |

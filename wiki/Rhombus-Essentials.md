@@ -16,6 +16,8 @@ Rhombus は Racket の上に乗る言語で、見た目は Python に近い（�
 
 **re-sketching との関係:** スケッチは `#lang re_sketching` ですが、文法は Rhombus そのものです。`def` / `fun` / `if` / `match` / `class` などがそのまま使えます。描画 API は [Cheat Sheet](Cheat-Sheet) を参照。
 
+**短い一覧だけ欲しいとき:** [Rhombus Cheat Sheet](Rhombus-Cheat-Sheet)
+
 ---
 
 ## 全体の地図（概要）
@@ -942,6 +944,7 @@ fun draw():
 
 ## 参照
 
+- クイックリファレンス: [Rhombus Cheat Sheet](Rhombus-Cheat-Sheet)
 - 公式 Essentials: [Rhombus Essentials](https://docs.racket-lang.org/rhombus-guide/Rhombus_Essentials.html)
 - ガイド全体: [Rhombus Guide](https://docs.racket-lang.org/rhombus-guide/)
-- 本リポジトリ: [Cheat Sheet](Cheat-Sheet) · [Examples](Examples) · [Home](Home)
+- 本リポジトリ: [Cheat Sheet](Cheat-Sheet)（描画） · [Examples](Examples) · [Home](Home)

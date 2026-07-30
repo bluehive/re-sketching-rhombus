@@ -2,7 +2,8 @@
 
 - [Home](Home)
 - [Rhombus Essentials](Rhombus-Essentials)
-- [Cheat Sheet](Cheat-Sheet)
+- [Rhombus Cheat Sheet](Rhombus-Cheat-Sheet)
+- [Cheat Sheet](Cheat-Sheet)（描画 API）
 - [Examples](Examples)
   - [Color](Examples-Color)
   - [Input](Examples-Input)

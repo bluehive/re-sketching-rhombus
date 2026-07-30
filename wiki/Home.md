@@ -5,8 +5,9 @@
 
 | ページ | 内容 |
 |--------|------|
-| [Rhombus Essentials](Rhombus-Essentials) | Rhombus 基本文法・シンタックス（[公式 Essentials](https://docs.racket-lang.org/rhombus-guide/Rhombus_Essentials.html) 要約） |
-| [Cheat Sheet](Cheat-Sheet) | 関数一覧のクイックリファレンス（[Sketching Overview](https://docs.racket-lang.org/manual-sketching/overview.html) 相当） |
+| [Rhombus Essentials](Rhombus-Essentials) | Rhombus 基本文法の解説（[公式 Essentials](https://docs.racket-lang.org/rhombus-guide/Rhombus_Essentials.html)） |
+| [Rhombus Cheat Sheet](Rhombus-Cheat-Sheet) | Rhombus 文法のクイックリファレンス |
+| [Cheat Sheet](Cheat-Sheet) | 描画 API 一覧（[Sketching Overview](https://docs.racket-lang.org/manual-sketching/overview.html) 相当） |
 | [Examples](Examples) | 描写サンプル（[Sketching Examples](https://docs.racket-lang.org/manual-sketching/Examples.html) 相当） |
 | [Drawing Primitives](Drawing-Primitives) | `point` / `line` / `ellipse` / `circle` / `arc` / `rect` / `square` / `quad` / `triangle` |
 | [Color and Style](Color-and-Style) | `background` / `fill` / `stroke` / ストローク属性 / モード |
