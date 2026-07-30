@@ -125,6 +125,15 @@ fun draw():
 
 `examples/test/sketch*.rkt` がこの表面です。
 
+## ドキュメント
+
+| 場所 | 内容 |
+|------|------|
+| [Cheat Sheet](docs/cheat-sheet.md) | Sketching Overview 風の関数一覧 |
+| [GitHub Wiki](https://github.com/bluehive/re-sketching-rhombus/wiki) | 描写・色・変換・入力などの詳細 |
+| `wiki/*.md` | Wiki のソース（リポジトリ内ミラー） |
+| `scripts/publish-wiki.sh` | `wiki/` → GitHub Wiki へ同期 |
+
 ## ディレクトリ構成
 
 | パス | 役割 |
@@ -134,6 +143,8 @@ fun draw():
 | `re-sketching/` | メタパッケージ |
 | `examples/test/*.rhm` | sketch1–9（Rhombus・主） |
 | `examples/test/*.rkt` | 同上（Racket 互換） |
+| `docs/cheat-sheet.md` | API チートシート |
+| `wiki/` | GitHub Wiki 用 Markdown |
 | `plan.md` | エージェント向け進捗プラン |
 
 ## アーキテクチャメモ
