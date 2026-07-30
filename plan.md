@@ -59,8 +59,8 @@ Surface is **`#lang re_sketching`**: preferred form is Rhombus/shrubbery when `r
 ### Phase 4 — Polish
 - [x] README usage
 - [x] `mise run` tasks (install, example, test-list)
-- [ ] GitHub remote push
-- [ ] Issue #14 progress comment
+- [x] GitHub remote push
+- [x] Issue #14 progress comment
 
 ## Success criteria
 
