@@ -104,14 +104,24 @@
 | `arc` · `circle` · `ellipse` · `line` · `point` |
 | `quad` · `rect` · `square` · `triangle` |
 
-### Curves & vertices
+### Curves（曲線）
 
 | Rhombus | Racket |
 |---------|--------|
 | `bezier` | `bezier` |
+
+```rhombus
+bezier(x1, y1, cx1, cy1, cx2, cy2, x2, y2)
+```
+
+### Vertex（頂点・自由形状）
+
+| Rhombus | Racket |
+|---------|--------|
 | `begin_shape` · `vertex` · `end_shape` | `begin-shape` · `vertex` · `end-shape` |
 
-`end_shape(#'close)` で閉じる。`begin_shape` の kind: 省略 / `#'default` · `#'points` · `#'lines` · `#'triangles`
+`end_shape(#'close)` で閉じる。  
+kind: 省略 / `#'default` · `#'points` · `#'lines` · `#'triangles`
 
 ### Modes
 
@@ -147,13 +157,17 @@ join: `#'miter` · `#'bevel` · `#'round`
 
 `dist` · `lerp` · `constrain` · `norm` · `remap` · `mag` · `sq` · `random`
 
-### Noise
+### Noise（ノイズ）
 
 | Rhombus | Racket |
 |---------|--------|
 | `noise` · `noise_seed` · `noise_detail` | `noise` · `noise-seed` · `noise-detail` |
 
-`noise(x)` / `noise(x, y)` / `noise(x, y, z)` → おおよそ `[0, 1]` の滑らかな値。
+```rhombus
+noise(x) / noise(x, y) / noise(x, y, z)   // ≈ [0, 1]
+noise_seed(42)
+noise_detail(4, 0.5)
+```
 
 ### Trigonometry helpers
 
